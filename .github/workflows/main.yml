@@ -15,8 +15,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push to Hugging Face
+      - name: Add Hugging Face remote
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://GuadalupeCas:$HF_TOKEN@huggingface.co/spaces/GuadalupeCas/Demo main
+          git remote add space https://GuadalupeCas:$HF_TOKEN@huggingface.co/spaces/GuadalupeCas/Demo
+
+      - name: Push to Hugging Face
+        run: |
+          git push --force space main
